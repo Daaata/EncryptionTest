@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Encryption Test</title>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js'></script>
+	</head>
+	<body>
+		<h1>Encryption Test</h1>
+		<h3>Plaintext：<input type="text" id="getPText" value="測試訊息 Test Content"></h3>
+		<h3>Ciphertext：<input type="text" id="getCText" value="VTJGc2RHVmtYMTlsaTlhN1hoYWN4UlZLV0FjZjRtWFJYRXdYdmFYM3poU1BOcXJqNHV2K2Z5czY4YWpqQ0gvUQ=="></h3>
+		<h3>Key：<input type="text" id="getKey" value="NtuT_C51E"></h3>
+		<button onclick="enCode()">Encode</button>
+		<button onclick="deCode()">Decode</button>
+		<h3>Result：</h3><h3 id="result"></h3>
+		
+		<script>
+		function enCode() {
+				var str = document.getElementById("getPText").value.toString();   //取得Content
+				var key = document.getElementById("getKey").value.toString();   //取得Key
+				temp = CryptoJS.AES.encrypt(str, key).toString();   //AES加密
+				res = btoa(temp);   //Base64加密
+				document.getElementById("result").innerHTML = res.toString();   //顯示結果
+				//var str = document.getElementById("getText").value.toString();   //取得Content
+				//res = btoa(str);   //Base64加密
+				//document.getElementById("result").innerHTML = "Base64 Encode: " + //res.toString();   //顯示結果
+			}
+		function deCode() {
+				var str = document.getElementById("getCText").value.toString();
+				var key = document.getElementById("getKey").value.toString();
+				temp = atob(str);
+				res = CryptoJS.AES.decrypt(temp, key).toString(CryptoJS.enc.Utf8);
+				document.getElementById("result").innerHTML = res.toString();
+			}
+		</script>
+	</body>
+</html>
+
